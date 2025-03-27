@@ -1,0 +1,18 @@
+.header{
+    background-color: black;
+    color: white;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+.header ul{
+    display: flex;
+    margin: 10px;
+}
+.header li{
+    margin-right: 20px;
+}
