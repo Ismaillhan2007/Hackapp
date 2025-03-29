@@ -27,4 +27,13 @@ def register_user(request):
         form = RegisterForm()
     return render (request,'register.html',{'form':form})
             
-            
+
+def login_user(request):
+    if request.method =='POST':
+        form = LoginForm(request.POST,request.FILES)
+        if form.is_valid():
+            user = form.get_user()
+            login(request,user)
+            return redirect('users:profile ',username = user.username)
+        else:
+            return render(request,'login.html',{'form':form})
