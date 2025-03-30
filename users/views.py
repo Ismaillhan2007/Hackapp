@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import CustomUser
-
 def home(request):
     return render(request, 'base.html')
 
@@ -34,7 +33,11 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request,user)
-            return redirect('users:profile ',username = user.username)
-        else:
-            form = LoginForm()
-            return render(request,'login.html',{'form':form})
+            return redirect('users:profile',username = user.username)
+    else:
+        form = LoginForm()
+    return render(request,'login.html',{'form':form})
+
+def profile_view(request, username):
+    user = get_object_or_404(CustomUser, username=username)
+    return render(request, 'profile.html', {'profile_user': user})

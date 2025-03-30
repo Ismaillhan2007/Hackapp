@@ -6,9 +6,9 @@
 
 <div class="Login_form">
     <h2>Login</h2>
-    <form method="get" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         {%csrf_token%}
-        {%form.as_p}
+        {{ form.as_p }}
         <button type="submit"> Login </button>
     </form>
 </div>
