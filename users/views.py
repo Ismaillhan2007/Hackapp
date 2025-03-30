@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import RegisterForm, LoginForm, EditForm
 from .models import CustomUser
-
+from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import CustomUser
@@ -36,4 +36,5 @@ def login_user(request):
             login(request,user)
             return redirect('users:profile ',username = user.username)
         else:
+            form = LoginForm()
             return render(request,'login.html',{'form':form})
