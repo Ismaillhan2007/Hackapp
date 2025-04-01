@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - HackOrg{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>Welcome, {{ user.username }}!</h2>
+    
+    <div class="profile-card">
+        <div class="profile-info">
+            <h3>Personal Information</h3>
+            <div class="info-group">
+                <label>Username:</label>
+                <span>{{ user.username }}</span>
+            </div>
+            <div class="info-group">
+                <label>Email:</label>
+                <span>{{ user.email }}</span>
+            </div>
+            <div class="info-group">
+                <label>Date Joined:</label>
+                <span>{{ user.date_joined|date:"F d, Y" }}</span>
+            </div>
+            {% if user.is_superuser %}
+            <div class="info-group">
+                <span class="admin-badge">Administrator</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- <div class="profile-actions">
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'change_password' %}" class="btn btn-secondary">Change Password</a>
+        </div> -->
+    </div>
+</div>
+
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .profile-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin-top: 1.5rem;
+    }
+
+    .profile-info {
+        margin-bottom: 2rem;
+    }
+
+    .info-group {
+        margin: 1rem 0;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .info-group label {
+        font-weight: bold;
+        margin-right: 1rem;
+        min-width: 120px;
+        display: inline-block;
+    }
+
+    .admin-badge {
+        background: #ff4757;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    .profile-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background: #2196f3;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: gray;
+        color : white;
+    }
+</style>
+{% endblock %}
+
