@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/',blank=True,null=True,verbose_name='avatar')
     email = models.EmailField(max_length=25,blank=True)
     
-    # # Add related_name to resolve the naming conflicts
+    # Add related_name to resolve the naming conflicts
     # groups = models.ManyToManyField(
     #     'auth.Group',
     #     related_name='custom_user_set',

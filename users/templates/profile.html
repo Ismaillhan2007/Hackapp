@@ -27,11 +27,11 @@
             </div>
             {% endif %}
         </div>
-<!-- 
-        <div class="profile-actions">
-            <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
-            <a href="{% url 'change_password' %}" class="btn btn-secondary">Change Password</a>
-        </div> -->
+ 
+         <div class="profile-actions"> 
+            <a href="{% url 'users:edit_profile' %}" class="btn btn-primary">Edit Profile</a> 
+        </div> 
+        <!-- without users:edit_profile it does not render profile -->
     </div>
 </div>
 

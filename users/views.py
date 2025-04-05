@@ -43,12 +43,15 @@ def profile_view(request, username):
     user = get_object_or_404(CustomUser, username=username)
     return render(request, 'profile.html', {'profile_user': user})
 
-# def edit_profile(request):
-#     user = request.user
-#     if request.method == 'POST':
-#         form = EditForm(request.POST, request.FILES, instance=user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('users:profile', username=user.username)
-#         else:
-#             return render(request, 'profile.html', {'form': form})
+
+@login_required
+def edit_profile(request):
+    user = user.request
+    if request.method == 'POST':
+        form = EditForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('users:profile', username=user.username)
+        else:
+            return render(request, 'edit_profile.html', {'form': form})
+    return render(request,'profile.html')
