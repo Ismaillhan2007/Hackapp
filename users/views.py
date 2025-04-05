@@ -46,7 +46,7 @@ def profile_view(request, username):
 
 @login_required
 def edit_profile(request):
-    user = user.request
+    user = request.user 
     if request.method == 'POST':
         form = EditForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
@@ -54,4 +54,4 @@ def edit_profile(request):
             return redirect('users:profile', username=user.username)
         else:
             return render(request, 'edit_profile.html', {'form': form})
-    return render(request,'profile.html')
+    return render(request, 'edit_profile.html', {'form': EditForm(instance=user)})
