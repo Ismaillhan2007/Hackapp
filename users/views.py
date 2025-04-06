@@ -1,7 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegisterForm, LoginForm, EditForm
+from .forms import RegisterForm, LoginForm, EditForm, LogoutForm
 from .models import CustomUser
 from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
@@ -55,3 +55,20 @@ def edit_profile(request):
         else:
             return render(request, 'edit_profile.html', {'form': form})
     return render(request, 'edit_profile.html', {'form': EditForm(instance=user)})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('users:home')
+# def logout_view(request):
+#     user = request.user
+#     if request.method == 'POST':
+#         form = LogoutForm(request.POST,request.FILES)
+#         if form.is_valid():
+#             logout(request)
+#             return redirect('users:profile',username = user.username )
+#         else:
+#             return render(request,'logout_profile.html',{'form':form})
+#     return render(request,'logout_profile.html', {'form':LogoutForm()})
+    
+   

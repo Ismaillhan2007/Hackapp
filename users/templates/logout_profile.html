@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 
-{%block title%} Edit Profile-Hackorg {% endblock%}
+{% block title %} Logout-Hackorg {% endblock %}
 
 {% block content %}
-<div class="edit_profile_container">
-    <h2>Edit Profile</h2>
+
+<div class="Logout_container">
+    <h2>Logout</h2>
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+        {% csrf token %}
         {{ form.as_p }}
-        <button type="submit" class="btn-primary">Save Changes</button>
+        <button type="submit">Logout</button>
     </form>
 </div>
 
+
 <style>
-     .edit_profile_container {
+       .Logout_container {
         max-width: 600px;
         margin: 2rem auto;
         padding: 2rem;
@@ -22,4 +24,5 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 </style>
-{%endblock%}
+
+{% endblock %}

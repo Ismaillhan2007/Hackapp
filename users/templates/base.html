@@ -9,12 +9,15 @@
     <header>
         <h1>Hackorg</h1>
         <ul>
-            <li><a href="{% url 'users:register' %}">Register</a></li>
-            <li><a href="{% url 'users:login' %}">Login</a></li>
-            <li></li>
-            <li></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'users:profile' username=user.username %}">Profile</a></li>
+                <li><a href="{% url 'users:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'users:register' %}">Register</a></li>
+                <li><a href="{% url 'users:login' %}">Login</a></li>
+            {% endif %}
         </ul>
-    </header>   
+    </header>    
     <main>
         {%block content%}
 

@@ -30,6 +30,11 @@
  
          <div class="profile-actions"> 
             <a href="{% url 'users:edit_profile' %}" class="btn btn-primary">Edit Profile</a> 
+            <form method="post" action="{% url 'users:logout' %}" style="margin: 0;">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
         </div> 
         <!-- without users:edit_profile it does not render profile -->
     </div>

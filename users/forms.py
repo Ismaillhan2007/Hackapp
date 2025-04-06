@@ -19,8 +19,11 @@ class EditForm(forms.ModelForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(required=True,label="Username")
     password = forms.CharField(required=True,widget=forms.PasswordInput,label="Password")
-    
-    class Meta:
-        model = CustomUser
-        fields = ('username','password')
+
+class LogoutForm(forms.Form):
+    confirm_logout = forms.BooleanField(
+        required=True,
+        label="Confirm Logout",
+        help_text="Check this box to confirm you want to logout"
+    )
         
