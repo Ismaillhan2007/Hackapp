@@ -60,15 +60,6 @@ def edit_profile(request):
 def logout_view(request):
     logout(request)
     return redirect('users:home')
-# def logout_view(request):
-#     user = request.user
-#     if request.method == 'POST':
-#         form = LogoutForm(request.POST,request.FILES)
-#         if form.is_valid():
-#             logout(request)
-#             return redirect('users:profile',username = user.username )
-#         else:
-#             return render(request,'logout_profile.html',{'form':form})
-#     return render(request,'logout_profile.html', {'form':LogoutForm()})
+
     
    
