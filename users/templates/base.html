@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,15 +10,19 @@
     <header>
         <h1>Hackorg</h1>
         <ul>
+            <li><a href="{% url 'users:home' %}">Home</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'users:profile' username=user.username %}">Profile</a></li>
+                {% if user.is_superuser %}
+                    <li><a href="{% url 'users:create_event' %}">Create Event</a></li>
+                {% endif %}
                 <li><a href="{% url 'users:logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'users:register' %}">Register</a></li>
                 <li><a href="{% url 'users:login' %}">Login</a></li>
             {% endif %}
         </ul>
-    </header>    
+    </header>
     <main>
         {%block content%}
 

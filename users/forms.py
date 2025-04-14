@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import CustomUser
+from .models import Events
+
 
 class RegisterForm(UserCreationForm):
     class Meta:
@@ -27,3 +29,10 @@ class LogoutForm(forms.Form):
         help_text="Check this box to confirm you want to logout"
     )
         
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Events
+        fields = ('title','description','date','location')
+        
+

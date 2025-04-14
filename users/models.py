@@ -41,3 +41,14 @@ class Events(models.Model):
 
 def __str__(self):
     return self.title 
+
+
+class EventsRegistration(models.Model):
+    event = models.ForeignKey(Events,on_delete=models.CASCADE,related_name='registrations')
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='event_registrations')
+    registered_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user','event')
+
+
