@@ -21,8 +21,9 @@ def is_superuser(user):
 
 
 @login_required
-@user_passes_test(is_superuser)
+@user_passes_test(is_superuser) 
 def create_event(request):
+    print("Here is mistake")
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
@@ -44,7 +45,7 @@ def event_detail(request,event_id):
 
 @login_required
 def register_for_event(request, event_id):
-    event = get_object_or_404(Events, id=event_id)
+    event = get_object_or_404(Events, id = event_id)
     if request.method == 'POST':
         # Check if already registered
         if not EventsRegistration.objects.filter(event=event, user=request.user).exists():
