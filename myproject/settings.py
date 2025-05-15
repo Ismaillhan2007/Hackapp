@@ -84,6 +84,8 @@ DATABASES = {
         'PASSWORD': 'ParoL051010', 
         'HOST': 'localhost',
         'PORT': '5432',
+        'CONN_MAX_AGE' : 'None',
+
     }
 }
 

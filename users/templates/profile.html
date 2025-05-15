@@ -21,6 +21,14 @@
                 <label>Date Joined:</label>
                 <span>{{ user.date_joined|date:"F d, Y" }}</span>
             </div>
+            <div class="info-group">
+                <label>Avatar:</label>
+                {% if user.avatar %}
+                    <img src="{{ user.profile.avatar }}">
+                {% else %}
+                    <span>No avatar uploaded</span>
+                {% endif%}
+            </div>
             {% if user.is_superuser %}
             <div class="info-group">
                 <span class="admin-badge">Administrator</span>
@@ -100,6 +108,13 @@
     .btn-secondary {
         background: gray;
         color : white;
+    }
+
+    .avatar-image {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 </style>
 {% endblock %}

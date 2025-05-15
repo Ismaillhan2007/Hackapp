@@ -7,7 +7,7 @@ from .models import Events
 class RegisterForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('username','email','password')
+        fields = ('username','email','password','avatar')
 
 class EditForm(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea,required=False,label="About myself")
