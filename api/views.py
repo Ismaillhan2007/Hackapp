@@ -8,7 +8,6 @@ from .forms import RegisterForm, LoginForm, EditProfileForm
 from .models import CustomUser, Events
 from .serializers import UserSerializer, EventSerializer
 from django.conf import settings
-
 # Web views
 def register_user(request):
     if request.method == 'POST':
@@ -46,7 +45,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Events.objects.all()
     serializer_class = EventSerializer
-    
+
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Events.objects.all()
@@ -55,4 +54,5 @@ class EventViewSet(viewsets.ModelViewSet):
         return Events.objects.none()
     
     def perform_create(self, serializer):
-        serializer.save(organizer=self.request.user)
+        user = CustomUser.objects.get(id=self.request.user.id)
+        serializer.save(organizer=user)
