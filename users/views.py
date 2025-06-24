@@ -10,6 +10,9 @@ from .models import CustomUser
 from .models import Events,EventsRegistration
 from .forms import EventForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from .models import Events
 
 def home(request):
     events = Events.objects.all().order_by('-date')
@@ -94,6 +97,7 @@ def login_view(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
+
 def profile_view(request, username):
     user = get_object_or_404(CustomUser, username=username)
     return render(request, 'profile.html', {'profile_user': user})
@@ -117,7 +121,4 @@ def logout_view(request):
     return redirect('users:home')
 
 
-
-
-    
    

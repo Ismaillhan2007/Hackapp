@@ -17,7 +17,7 @@
             <p>{{ event.date|date:"F d, Y - h:i A" }}</p>
             <p>{{ event.location }}</p>
             <p>{{ event.description|truncatewords:20 }}</p>
-            <a href="{% url 'users:event_detail' event_id=event.id %}" class="btn btn-secondary">View Details</a>
+            <!-- <a href="{% url 'users:event_detail' event_id=event.id %}" class="btn btn-secondary">View Details</a> -->
         </div>
         {% empty %}
         <p>No upcoming events at the moment. Check back later!</p>
