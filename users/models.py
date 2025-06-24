@@ -52,3 +52,7 @@ class EventsRegistration(models.Model):
         unique_together = ('user','event')
 
 
+
+
+
+
