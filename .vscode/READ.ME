@@ -1,5 +1,6 @@
-All user actions are made in users app.App has models for User actions,such as events,CustomUser that is used all across the app to define user.In views.py app has actions for registration,login,events creation and etc.
-App has different authemtication levels so that some users could have more rights than other.
-In settings py connected rest_api for Frontend connection and special user rights.Also I have postgres sql server
-As pages I used Django.html also with different access level.
-There is another app-api.API has serializers actions for special users to create and change events.
+All users actions are made in views.py
+I have two apps-Api and users,they use the same model Customuser
+All forms are made in order to be used in views.py
+For API I use rest.api
+For Database I use POSTGRES which recieves users information
+Now Users can add avatar,create profile,log in,log out,data is protected by Django functions and Database security.
