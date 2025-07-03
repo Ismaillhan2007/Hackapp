@@ -13,9 +13,6 @@
             <li><a href="{% url 'users:home' %}">Home</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'users:profile' username=user.username %}">Profile</a></li>
-                {% if user.is_superuser %}
-                    <li><a href="{% url 'users:create_event' %}">Create Event</a></li>
-                {% endif %}
                 <li><a href="{% url 'users:logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'users:register' %}">Register</a></li>

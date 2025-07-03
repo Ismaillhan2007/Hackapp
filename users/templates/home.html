@@ -1,29 +1,44 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="events-container">
-    <h2>Upcoming Events</h2>
-    
-    {% if user.is_superuser %}
-    <div class="admin-controls">
-        <a href="{% url 'users:create_event' %}" class="btn btn-primary">Create Event</a>
-    </div>
-    {% endif %}
-    
-    <div class="events-list">
-        {% for event in events %}
-        <div class="event-card">
-            <h3>{{ event.title }}</h3>
-            <p>{{ event.date|date:"F d, Y - h:i A" }}</p>
-            <p>{{ event.location }}</p>
-            <p>{{ event.description|truncatewords:20 }}</p>
-            <!-- <a href="{% url 'users:event_detail' event_id=event.id %}" class="btn btn-secondary">View Details</a> -->
-        </div>
-        {% empty %}
-        <p>No upcoming events at the moment. Check back later!</p>
-        {% endfor %}
-    </div>
-</div>
-{% endblock %}
+{% block title %}Home - HackOrg{% endblock %}
 
-#It is not working yet
+{% block content %}
+
+<div class="home-container">
+    <h1>Welcome to HackOrg</h1>
+    <p>Your one-stop platform for hackathons and tech events.</p>
+    <p>Join us to connect, collaborate, and innovate!</p>
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}! Explore your <a href="{% url 'users:profile' username=user.username %}">profile</a> or <a href="{% url 'users:logout' %}">logout</a>.</p>
+    {% else %}
+        <p><a href="{% url 'users:register' %}">Register</a> or <a href="{% url 'users:login' %}">login</a> to get started.</p>
+    {% endif %}
+</div>  
+
+{% endblock %}
+<style>
+    .home-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        text-align: center;
+    }
+
+    .home-container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .home-container p {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .home-container a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .home-container a:hover {
+        text-decoration: underline;
+    }

@@ -8,10 +8,6 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <div class="superuser_option">
-            <label for="is_superuser">Register as administrator:</label>
-            <input type="checkbox" name="is_superuser" id="is_superuser">
-        </div>
         <button type="submit">Register</button>
     </form>
 </div>

@@ -7,77 +7,20 @@ from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import CustomUser
-from .models import Events,EventsRegistration
-from .forms import EventForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
-from .models import Events
+ 
 
 def home(request):
-    events = Events.objects.all().order_by('-date')
-    return render(request, 'home.html',{'events':events})
-
-
-def is_superuser(user):
-    return user.is_superuser 
-
-
-@login_required
-@user_passes_test(is_superuser) 
-def create_event(request):
-    print("Here is mistake")
-    if request.method == 'POST':
-        form = EventForm(request.POST)
-        if form.is_valid():
-            event = form.save(commit=False)
-            event.organizer = request.user
-            event.save()
-            return redirect('users:event_detail',event_id = event.id)
-    else:
-        form = EventForm()
-    return render(request,'create_event.html', {'form':form })
-
-def event_detail(request,event_id):
-    event = get_object_or_404(Events, id = event_id)
-    is_registered = request.user.is_authenticated and EventsRegistration.objects.filter(event=event, user=request.user).exists()
-    return render(request,'home.html',{
-        'event': event,
-        'is_registered': is_registered,
-    })
-
-@login_required
-def register_for_event(request, event_id):
-    event = get_object_or_404(Events, id = event_id)
-    if request.method == 'POST':
-        # Check if already registered
-        if not EventsRegistration.objects.filter(event=event, user=request.user).exists():
-            EventsRegistration.objects.create(event=event, user=request.user)
-        return redirect('users:event_detail', event_id=event.id)
-    return render(request, 'home.html', {'event': event})
-
-# Edit event (superusers only)
-@user_passes_test(is_superuser)
-def edit_event(request, event_id):
-    event = get_object_or_404(Events, id=event_id)
-    if request.method == 'POST':
-        form = EventForm(request.POST, instance=event)
-        if form.is_valid():
-            form.save()
-            return redirect('users:event_detail', event_id=event.id)
-    else:
-        form = EventForm(instance=event)
-    return render(request, 'home.html', {'form': form})
-
-
+    if request.user.is_authenticated:
+        return redirect('users:profile', username=request.user.username)
+    return render(request, 'home.html')
 def register_user(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST,request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
-            is_superuser = request.POST.get('is_superuser',False)
-            if is_superuser:
-                user.is_superuser = True
             user.save()
             login(request,user)
             return redirect('users:profile', username=user.username)
