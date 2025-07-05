@@ -134,6 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-
-SECURE_SSL_REDIRECT = True#Redirect all HTTP requests to HTTPS,used to protect data in transit
-SESSION_COOKIE_SECURE  = True#Ensure that the session cookie is only sent over HTTPS,used to protect session data
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
